@@ -1,25 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \Illuminate\Http\Request;
 use App\Models\Post;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('index');
+Route::get('/foodie', function () {
+    return view('index', [
+        'post' => Post::json()
+    ]);
 });
 
-Route::get('foodie-details/{food}', function ($food){
-    return view ('foodie_details', [
-    'foodie_details' => Post::find($food)
+Route::get('foodie-details/{id}', function($id){
+    return view('foodie_details',[
+        'arrayIndex' => Post::getArrayIndex($id),
     ]);
 });

@@ -8,14 +8,20 @@ use SplFileInfo;
 
 
 class Post{
-    public static function find($food){
-        $filepath = resource_path("foodie-details/{$food}.html");
 
-        // if(!file_exists($filepath)){  
-        //     throw new ModelNotFoundException();
-        // }
-        $content = file_get_contents($filepath);
-        return $content;
+    public static function json(){
+        $json = json_decode(file_get_contents(resource_path("/../public/foodie-rev.json")));
+        // dd($json);
+        return $json;
+    }
+
+    public static function getArrayIndex($id){
+        $json = json_decode(file_get_contents(resource_path("/../public/foodie-rev.json")),true);
+        $index = intval($id)-1;
+        $arrayIndex = $json[$index];
+        // dd($arrayIndex);
+        return $arrayIndex;
     }
 }
+
 ?>
